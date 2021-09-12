@@ -87,6 +87,7 @@ while : ; do
 
   mkdir "$DST_DIR/app_"$NEXT_APP_ID"_"$APP_ID 2>/dev/null
   [[ $? -eq 0 ]] && break
+done
 
 APP_DIR="$DST_DIR/app_"$NEXT_APP_ID"_"$APP_ID
 
