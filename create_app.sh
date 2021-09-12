@@ -74,12 +74,19 @@ done
     exit 2
 }
 
-NEXT_APP_ID=1
+NEXT_APP_ID=0
 while : ; do
+  NEXT_APP_ID=$((NEXT_APP_ID+1))
+
+  FOUND=0
+  for i in ${DST_DIR}/app_${NEXT_APP_ID}_*; do
+    [[ -e "$i" ]] && FOUND=1
+    break
+  done
+  [[ $FOUND -eq 1 ]] && continue
+
   mkdir "$DST_DIR/app_"$NEXT_APP_ID"_"$APP_ID 2>/dev/null
   [[ $? -eq 0 ]] && break
-  NEXT_APP_ID=$((NEXT_APP_ID+1))
-done
 
 APP_DIR="$DST_DIR/app_"$NEXT_APP_ID"_"$APP_ID
 
@@ -113,4 +120,3 @@ echo -e "\e[31;1m
     1. Add app and download **google-service.json** https://console.firebase.google.com/project/zaebbapp/settings/general/android:${APP_ID}?hl=ru 
     2. Add app attribution https://go.kochava.com/v/#/17993/55427/app/list
 \e[0m"
-
